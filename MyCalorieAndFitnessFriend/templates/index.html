@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+<!-- <li><a href="reg/register">Register</a></li> -->
+{% block content %}
+{% if user.is_authenticated %}
+<li>hello,{{user.first_name}}</li>
+<li><a href="accounts/logout">logout</a></li>
+{% else %}
+<li><a href="accounts/register">Register</a></li>
+<li><a href="accounts/login">login</a></li>
+{% endif %}
+
+<form action="bmi" method="post">
+    {% csrf_token %}
+    Enter weight in kg : <input type="text" name="num1"> <br>
+    Enter height in metre : <input type="text" name="num2"><br>
+    <input type="submit">
+</form>
+
+{% endblock %}
