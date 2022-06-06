@@ -7,22 +7,25 @@ from django.contrib.auth.models import User, auth
 def home(request):
     api_url = 'https://api.calorieninjas.com/v1/nutrition?query='
     query = '3lb carrots and a chicken sandwich'
-    searchquery=request.GET.get('searchquery')
-    print (searchquery)
-    if searchquery is not None:
-      query = searchquery
-    response = requests.get(api_url + query, headers={'X-Api-Key': 'oUqvROZU7DmOYcEgLLLxFA==Oyih5zrrT6A2vFp7'})
-    data=response.json()
-    # print(data)
-    # if response.status_code == requests.codes.ok:
-    #    print(response.text)
-    # else:
-    #     print("Error:", response.status_code, response.text)
-    items=data['items']
-    context={
-        'items':items
-    }
-    return render(request,'index.html',context)
+    if request.method=="POST":
+       searchquery=request.POST['searchquery']
+       print (searchquery)
+       if searchquery is not None:
+          query = searchquery
+       response = requests.get(api_url + query, headers={'X-Api-Key': 'oUqvROZU7DmOYcEgLLLxFA==Oyih5zrrT6A2vFp7'})
+       data=response.json()
+          # print(data)
+          # if response.status_code == requests.codes.ok:
+          #    print(response.text)
+          # else:
+          #     print("Error:", response.status_code, response.text)
+       items=data['items']
+       context={
+              'items':items
+       }
+       return render(request,'foodnutrients.html',context)
+    else:
+        return render(request,'index.html')
 
 def bmi(request):
     val1=int(request.POST['num1'])

@@ -29,11 +29,13 @@
           <h1><a class="navbar-brand" href="/">My Calorie And Fitness Friend</a></h1>
           <div id="navbar">
             <ul class="nav pull-right">
-              <li class="nav-item"><a class="nav-link" href="{%url 'index'%}">Calorie Tracker</a></li>
+              <!-- <li class="nav-item"><a class="nav-link" href="{%url 'index'%}">Calorie Tracker</a></li> -->
               <li class="nav-item"><a class="nav-link" href="payment/pay">Donate Now</a></li>
               {% if user.is_authenticated %}
-              <li class="nav-item"><a class="nav-link" href="{%url 'foodmanage'%}">Mess Food</a></li>
+              <!-- <li class="nav-item"><a class="nav-link" href="{%url 'foodmanage'%}">Mess Food</a></li> -->
               <li class="nav-item"><a class="nav-link" href="#contact">Hello,{{user.first_name}}</a></li>
+              <li class="nav-item"><a class="nav-link" href="{%url 'foodmanage'%}">Mess Food</a></li>
+              <li class="nav-item"><a class="nav-link" href="{%url 'index'%}">Calorie Tracker</a></li>
               <li class="nav-item"><a class="nav-link" href="accounts/logout">Logout</a></li>
               {% else %}
               <li class="nav-item"><a class="nav-link" href="accounts/login">Login</a></li>
@@ -56,11 +58,14 @@
             <p class="mt-5"><strong class="text-uppercase">Try for Free</strong><span> - Enter the Food item whose nutrient components you want</span></p>
           </div>
         </div>
+        <form action="" method="post">
+            {% csrf_token %}
         <div class="row no-gutters">
           <div class="col-md-4 col-sm-12 tf-hh-col">
-            <input class="mt-1 form-control" type="text" placeholder="Enter food item">
+            <input class="mt-1 form-control" type="text" name="searchquery" placeholder="Enter food item">
           </div>
-          <div class="col-md-3 col-sm-12"><a class="tf-header-heading-btn a btn btn-primary btn-block mt-1" href="#">Get nutrient components</a></div>
+          <input class="col-md-3 col-sm-12 tf-header-heading-btn a btn btn-primary btn-block mt-1" type="submit"></button>
+        </form>
         </div>
       </div>
     </header>
@@ -155,13 +160,14 @@
     <div class="row">
       <div class="col-md-6 col-sm-12">
         <h3 class="h5">Enter The Details</h3>
-        <form action="https://formspree.io/youremail@example.com" method="POST">
+        <form action="bmi" method="POST">
+            {% csrf_token %}
           <div class="row no-gutters">
             <div class="col-lg-6 col-md-12 col-sm-12 tf-contact-col">
-              <input class="bg-light form-control" type="text" name="name" placeholder="Weight in Kilogram" required="required"/>
+              <input class="bg-light form-control" type="text" name="num1" placeholder="Weight in Kilogram" required="required"/>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 pb-2">
-              <input class="bg-light form-control" type="text" name="_replyto" placeholder="Height in Metre" required="required"/>
+              <input class="bg-light form-control" type="text" name="num2" placeholder="Height in Metre" required="required"/>
             </div>
           </div>
           <!-- <div class="row pb-2 no-gutters">
