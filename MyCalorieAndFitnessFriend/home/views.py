@@ -1,8 +1,26 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Food, Consume
+import requests
 def home(request):
-    return render(request,'index.html')
+    api_url = 'https://api.calorieninjas.com/v1/nutrition?query='
+    query = '3lb carrots and a chicken sandwich'
+    searchquery=request.GET.get('searchquery')
+    print (searchquery)
+    if searchquery is not None:
+      query = searchquery
+    response = requests.get(api_url + query, headers={'X-Api-Key': 'oUqvROZU7DmOYcEgLLLxFA==Oyih5zrrT6A2vFp7'})
+    data=response.json()
+    # print(data)
+    # if response.status_code == requests.codes.ok:
+    #    print(response.text)
+    # else:
+    #     print("Error:", response.status_code, response.text)
+    items=data['items']
+    context={
+        'items':items
+    }
+    return render(request,'index.html',context)
 
 def bmi(request):
     val1=int(request.POST['num1'])
