@@ -29,12 +29,17 @@
           <h1><a class="navbar-brand" href="/">My Calorie And Fitness Friend</a></h1>
           <div id="navbar">
             <ul class="nav pull-right">
-              <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="#work">Signup</a></li>
-              <li class="nav-item"><a class="nav-link" href="#contact">Login</a></li>
-              <li class="nav-item"><a class="nav-link" href="#contact">Logout</a></li>
-              <li class="nav-item"><a class="nav-link" href="#contact">CaloryCalculator</a></li>
-              <li class="nav-item"><a class="nav-link" href="#contact">Donate Now</a></li>
+              <li class="nav-item"><a class="nav-link" href="{%url 'index'%}">Calorie Tracker</a></li>
+              <li class="nav-item"><a class="nav-link" href="payment/pay">Donate Now</a></li>
+              {% if user.is_authenticated %}
+              <li class="nav-item"><a class="nav-link" href="{%url 'foodmanage'%}">Mess Food</a></li>
+              <li class="nav-item"><a class="nav-link" href="#contact">Hello,{{user.first_name}}</a></li>
+              <li class="nav-item"><a class="nav-link" href="accounts/logout">Logout</a></li>
+              {% else %}
+              <li class="nav-item"><a class="nav-link" href="accounts/login">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="accounts/register">Signup</a></li>
+              {% endif %}
+
             </ul>
           </div>
         </div>
