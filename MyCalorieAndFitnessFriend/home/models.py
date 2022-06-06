@@ -21,3 +21,11 @@ class Food(models.Model):
 class Consume(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     food_consumed = models.ForeignKey(Food, on_delete=models.CASCADE)
+
+
+
+class FoodManage(models.Model):
+    name = models.CharField(max_length=50)
+    eat = models.CharField(max_length=50)
+    date = models.DateField(max_length=50)
+    rating = models.CharField(max_length=50)

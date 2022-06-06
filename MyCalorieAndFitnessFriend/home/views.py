@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Food, Consume
+from .models import Food, Consume, FoodManage
 import requests
+from django.contrib import messages
+from django.contrib.auth.models import User, auth
 def home(request):
     api_url = 'https://api.calorieninjas.com/v1/nutrition?query='
     query = '3lb carrots and a chicken sandwich'
@@ -53,3 +55,15 @@ def delete_consume(request, id):
         return redirect('/user')
     return render(request, 'delete.html')
 
+def foodmanage(request):
+
+    if request.method=='POST':
+        name=request.POST['name']
+        date=request.POST['date']
+        eat=request.POST['eat']
+        rating=request.POST['rating']
+        fm = FoodManage.objects.create(name=name,date=date,rating=rating,eat=eat)
+        return redirect('/')
+        
+    else:   
+        return render(request,'foodmanage.html')

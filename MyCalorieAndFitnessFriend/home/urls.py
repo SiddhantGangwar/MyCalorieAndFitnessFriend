@@ -6,4 +6,5 @@ urlpatterns = [
     path('bmi',views.bmi,name='bmi'),
     path('user', views.index, name="index"),
     path('delete/<int:id>/', views.delete_consume, name="delete"),
+    path('foodmanage/', views.foodmanage, name="foodmanage"),
 ]
